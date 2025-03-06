@@ -139,12 +139,12 @@ int main(){
 		}
 		
 		window.clear();                                          //
-	    window.draw(spriteBackground);                           // Draws bg
-	    window.draw(spriteCloud1);                               //
-	    window.draw(spriteCloud2);                               // Draws Clouds
-	    window.draw(spriteCloud3);                               //
-	    window.draw(spriteTree);                                 // Draws tree
-	    window.draw(spriteBee);                                  // Draws bee
+	    	window.draw(spriteBackground);                           // Draws bg
+	    	window.draw(spriteCloud1);                               //
+	    	window.draw(spriteCloud2);                               // Draws Clouds
+	    	window.draw(spriteCloud3);                               //
+	    	window.draw(spriteTree);                                 // Draws tree
+	    	window.draw(spriteBee);                                  // Draws bee
 		window.display();                                        //
 	}
 	
