@@ -27,7 +27,10 @@ int main(){
 	textureBee.loadFromFile("graphics/bee.png");                 // adding bee
 	Sprite spriteBee;                                            //
 	spriteBee.setTexture(textureBee);                            //
-	spriteBee.setPosition(0,800);                                //
+	spriteBee.setPosition(0,800);				     //
+
+	bool beeActive=false;
+	float beeSpeed=0.0f;
 	
 	Texture textureCloud;                                        //
 	textureCloud.loadFromFile("graphics/cloud.png");             // cloud texture
@@ -40,6 +43,8 @@ int main(){
 	spriteCloud3.setTexture(textureCloud);                       //
 	spriteCloud3.setScale(0.89, 0.89);
 	spriteCloud3.setPosition(0,300);                             //
+
+	Clock clock; // clock is an object of class Clock
 	
 	while(window.isOpen())
 	{
@@ -57,6 +62,23 @@ int main(){
 		{                                                        // exits games on clicking escape
 			window.close();                                      //
 		}                                                        //
+
+		Time dt = clock.restart();                               //dt is an object of class time
+
+		if(!beeActive){
+			srand((int)time(0));				//srand for generating within a 'fraction of second'
+			beeSpeed=(rand() %200)+200;			//rand for generating within a range
+			float height = (rand() %500)+500;
+			spriteBee.setPosition(2000,height);
+			beeActive=true;
+		}
+		else{
+			spriteBee.setPosition(spriteBee.getPosition().x-(beeSpeed*dt.asSeconds()),spriteBee.getPosition().y);
+			if(spriteBee.getPosition().x<-100){
+				beeActive=false;
+			}
+		}
+
 		
 		window.clear();                                          //
 	    window.draw(spriteBackground);                           // Draws bg
