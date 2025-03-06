@@ -44,6 +44,17 @@ int main(){
 	spriteCloud3.setScale(0.89, 0.89);
 	spriteCloud3.setPosition(0,300);                             //
 
+	bool cloud1Active=false;
+	float cloud1Speed=0.0f;
+
+
+	bool cloud2Active=false;
+	float cloud2Speed=0.0f;
+
+
+	bool cloud3Active=false;
+	float cloud3Speed=0.0f;
+	
 	Clock clock; // clock is an object of class Clock
 	
 	while(window.isOpen())
@@ -79,6 +90,53 @@ int main(){
 			}
 		}
 
+		//Cloud 1
+
+		if(!cloud1Active){
+			srand((int)time(0));
+			cloud1Speed=(rand() %120)+120;
+			float height = (rand() %500)+500;
+			spriteCloud1.setPosition(-100,0);
+			cloud1Active=true;
+		}
+		else{
+			spriteCloud1.setPosition(spriteCloud1.getPosition().x+(cloud1Speed*dt.asSeconds()),spriteCloud1.getPosition().y);
+			if(spriteCloud1.getPosition().x>2000){
+				cloud1Active=false;
+			}
+		}
+
+		//Cloud 2
+		
+		if(!cloud2Active){
+			srand((int)time(0));
+			cloud2Speed=(rand() %110)+110;
+			float height = (rand() %500)+500;
+			spriteCloud2.setPosition(-100,150);
+			cloud2Active=true;
+		}
+		else{
+			spriteCloud2.setPosition(spriteCloud2.getPosition().x+(cloud2Speed*dt.asSeconds()),spriteCloud2.getPosition().y);
+			if(spriteCloud2.getPosition().x>2000){
+				cloud2Active=false;
+			}
+		}
+
+		//Cloud 3
+		
+		if(!cloud3Active){
+			srand((int)time(0));
+			cloud3Speed=(rand() %100)+100;
+			float height = (rand() %500)+500;
+			spriteCloud3.setPosition(-100,300);
+			cloud3Active=true;
+		}
+		else{
+			spriteCloud3.setPosition(spriteCloud3.getPosition().x+(cloud3Speed*dt.asSeconds()),spriteCloud3.getPosition().y);
+			if(spriteCloud3.getPosition().x>2000){
+				cloud3Active=false;
+			}
+		}
 		
 		window.clear();                                          //
 	    window.draw(spriteBackground);                           // Draws bg
