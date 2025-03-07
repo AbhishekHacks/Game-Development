@@ -54,6 +54,8 @@ int main(){
 
 	bool cloud3Active=false;
 	float cloud3Speed=0.0f;
+
+	bool stop = false;
 	
 	Clock clock; // clock is an object of class Clock
 
@@ -122,6 +124,9 @@ int main(){
 			paused=true;
 		}
 		}
+
+		if(Keyboard::isKeyPressed(Keyboard::Return)||stop==true){
+		stop=true;
 		
 		if(!beeActive){
 			srand((int)time(0));				//srand for generating within a 'fraction of second'
@@ -183,6 +188,7 @@ int main(){
 			if(spriteCloud3.getPosition().x>2000){
 				cloud3Active=false;
 			}
+		    }
 		}
 		
 		window.clear();                                          //
