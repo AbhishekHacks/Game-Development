@@ -56,6 +56,21 @@ int main(){
 	float cloud3Speed=0.0f;
 	
 	Clock clock; // clock is an object of class Clock
+
+	RectangleShape timeBar; // timebar is an object of class RectangeShape
+	float timeBarStartWidth=400;
+	float timeBarHeight=80;
+	timeBar.setSize(Vector2f(timeBarStartWidth,timeBarHeight)); //set the width and height of the timeBar
+	timeBar.setFillColor(Color::Red); //set the color
+	timeBar.setPosition(((1920/2)-200),980); //set the position of timeBar in window
+	
+	Time gameTimeTotal; // gameTimeTotal is an object of class Time
+	float TimeRemaining = 6.0f; //game start at 6 seconds
+	float timeBarWidthPerSecond = timeBarStartWidth/TimeRemaining; //every second the time bar reduces by timeBarWidthPerSecond pixels
+	bool paused=true;
+	int score=0;
+
+	//Gaming Loop
 	
 	while(window.isOpen())
 	{
@@ -76,6 +91,15 @@ int main(){
 
 		Time dt = clock.restart();                               //dt is an object of class time
 
+		if(!paused){
+			TimeRemaining-=dt.asSeconds();
+			timeBar.setSize(Vector2f(timeBarWidthPerSecond*TimeRemaining,timeBarHeight));
+
+		if(TimeRemaining<=0.0f){
+			paused=true;
+		}
+		}
+		
 		if(!beeActive){
 			srand((int)time(0));				//srand for generating within a 'fraction of second'
 			beeSpeed=(rand() %200)+200;			//rand for generating within a range
@@ -145,7 +169,8 @@ int main(){
 	    	window.draw(spriteCloud3);                               //
 	    	window.draw(spriteTree);                                 // Draws tree
 	    	window.draw(spriteBee);                                  // Draws bee
-		window.display();                                        //
+		window.draw(timeBar);
+		window.display();                                        //display
 	}
 	
 	return 0;	
