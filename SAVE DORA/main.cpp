@@ -11,7 +11,7 @@ window.setView(view);
 
 //background
 Texture textureBackground;
-textureBackground.loadFromFile("graphics/underwaterplant.jpg");
+textureBackground.loadFromFile("graphics1/underwaterplant.jpg");
 Sprite spriteBackground;
 spriteBackground.setTexture(textureBackground);
 spriteBackground.setPosition(0,0);
@@ -19,13 +19,13 @@ spriteBackground.setPosition(0,0);
 
 //Fish
 Texture textureFish;
-textureFish.loadFromFile("graphics/fish-picaai-Photoroom.png");
+textureFish.loadFromFile("graphics1/fish-picaai-Photoroom.png");
 Sprite spriteFish;
 spriteFish.setTexture(textureFish);
 FloatRect bounds = spriteFish.getLocalBounds();
 float width = bounds.width;
 spriteFish.setPosition(0,2160/2-350);
-
+spriteFish.setScale(0.8f,0.8f);
 
 
 while(window.isOpen()){
