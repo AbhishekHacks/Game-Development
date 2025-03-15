@@ -60,6 +60,9 @@ movingright=false;
 spriteFish.setScale(2.5f,2.5f);
 }
 }
+if(Keyboard::isKeyPressed(Keyboard::Return)){
+break;
+}
 if(Keyboard::isKeyPressed(Keyboard::Escape)){
 window.close();
 }
@@ -75,4 +78,19 @@ window.draw(spriteFish);
 window.draw(text1);
 window.display();
 }
+while(window.isOpen()){
+Event event;
+while(window.pollEvent(event)){
+if(event.type==Event::Closed){
+window.close();
+}
+}
+if(Keyboard::isKeyPressed(Keyboard::Escape)){
+window.close();
+}
+window.clear();
+window.draw(spriteBackground);
+window.display();
+}
+return 0;
 }
