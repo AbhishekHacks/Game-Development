@@ -188,15 +188,23 @@ timeRemaining=5;
 if(acceptInput){
 if(Keyboard::isKeyPressed(Keyboard::Right)){
 playerSide = side::RIGHT;
+score++;
 spriteaxe.setPosition(AXE_POSITION_RIGHT,spriteaxe.getPosition().y);
 spriteman.setPosition(1200,720);
-score++;
+spritelog.setPosition(810,720);
+logspeedX=-5000;
+logActive=true;
+acceptInput=false;
 }
 if(Keyboard::isKeyPressed(Keyboard::Left)){
 playerSide = side::LEFT;
+score++;
 spriteaxe.setPosition(AXE_POSITION_LEFT,spriteaxe.getPosition().y);
 spriteman.setPosition(580,720);
-score++;
+spritelog.setPosition(810,720);
+logspeedX=5000;
+logActive=true;
+acceptInput=false;
 }
 }
 
