@@ -20,18 +20,21 @@ RenderWindow window(vm,"TIMBER MAN GAME", Style::Fullscreen);   //RenderWindow -
 View view(FloatRect(0,0,1920,1080));
 window.setView(view);
 
+//Background
 Texture textureBackground;
 textureBackground.loadFromFile("graphics/background.png");
 Sprite spriteBackground;
 spriteBackground.setTexture(textureBackground);
 spriteBackground.setPosition(0,0); 
 
+//Tree
 Texture textureTree;
 textureTree.loadFromFile("graphics/tree.png");
 Sprite spriteTree;
 spriteTree.setTexture(textureTree);
 spriteTree.setPosition(810,0); 
 
+//Branches
 Texture textureBranch;
 textureBranch.loadFromFile("graphics/branch.png");
 for(int i=0;i<NUM_BRANCHES;i++){
@@ -40,6 +43,7 @@ branches[i].setPosition(1110,200);
 branches[i].setOrigin(0,0);
 }
 
+//Bee
 Texture textureBee;
 textureBee.loadFromFile("graphics/bee.png");
 Sprite spriteBee;
@@ -50,6 +54,7 @@ bool beeActive=false;
 float beeSpeed=0.0f;
 
 
+//Clouds
 Texture textureCloud;
 textureCloud.loadFromFile("graphics/cloud.png");
 Sprite spriteCloud1, spriteCloud2, spriteCloud3;
@@ -69,6 +74,47 @@ float cloud2Speed=0.0f;
 
 bool cloud3Active=false;
 float cloud3Speed=0.0f;
+
+//Timber Man
+Texture textureman;
+textureman.loadFromFile("graphics/player.png");
+Sprite spriteman;
+spriteman.setTexture(textureman);
+spriteman.setPosition(580,720);
+
+side playerSide = side::LEFT;
+
+//Axe
+Texture textureaxe;
+textureaxe.loadFromFile("graphics/axe.png");
+Sprite spriteaxe;
+spriteaxe.setTexture(textureaxe);
+spriteaxe.setPosition(700,830);
+
+const float AXE_POSITION_LEFT = 700;
+const float AXE_POSITION_RIGHT = 1075;
+
+//log
+Texture texturelog;
+texturelog.loadFromFile("graphics/log.png");
+Sprite spritelog;
+spritelog.setTexture(texturelog);
+spritelog.setPosition(810,720);
+
+bool logActive = false;
+float logspeedX=1000;
+float logspeedY=-1500;
+bool acceptInput=false;
+
+//Gravestone
+Texture texturerip;
+texturerip.loadFromFile("graphics/rip.png");
+Sprite spriterip;
+spriterip.setTexture(texturerip);
+spriterip.setPosition(600,860);
+
+
+
                           
 Clock clock;
 
@@ -117,7 +163,15 @@ while(window.isOpen()){
 
 Event event;
 while(window.pollEvent(event)){
-if(event.type==Event::Closed){
+if(event.type==Event::KeyReleased&&!paused){
+acceptInput=true;
+spriteaxe.setPosition(2000,spriteaxe.getPosition().y);
+}
+}
+
+Event event1;
+while(window.pollEvent(event1)){
+if(event1.type==Event::Closed){
 window.close();
 }
 }
@@ -129,6 +183,21 @@ if(Keyboard::isKeyPressed(Keyboard::Return)){
 paused=false;
 score=0;
 timeRemaining=5;
+}
+
+if(acceptInput){
+if(Keyboard::isKeyPressed(Keyboard::Right)){
+playerSide = side::RIGHT;
+spriteaxe.setPosition(AXE_POSITION_RIGHT,spriteaxe.getPosition().y);
+spriteman.setPosition(1200,720);
+score++;
+}
+if(Keyboard::isKeyPressed(Keyboard::Left)){
+playerSide = side::LEFT;
+spriteaxe.setPosition(AXE_POSITION_LEFT,spriteaxe.getPosition().y);
+spriteman.setPosition(580,720);
+score++;
+}
 }
 
 Time dt=clock.restart();    //dt is an object of class "Time"
@@ -246,7 +315,11 @@ for(int i=0;i<NUM_BRANCHES;i++){
 window.draw(branches[i]);
 }
 window.draw(spriteTree);
+window.draw(spriteman);
+window.draw(spriteaxe);
+window.draw(spriterip);
 window.draw(spriteBee);
+window.draw(spritelog);
 window.draw(timeBar);
 if(paused){
 window.draw(messageText);
