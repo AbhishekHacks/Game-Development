@@ -1,6 +1,8 @@
 //header files
 #include<SFML/Graphics.hpp>
+#include<sstream>
 #include "Bat.cpp"
+#include "Ball.cpp"
 using namespace sf;
 
 //main function
@@ -17,7 +19,22 @@ int main(){
 	window.setView(view);
 	
 	//draw a bat
-	Bat bat(960,1060); 
+	Bat bat(960,1000); 
+	
+	//ball object
+	Ball ball(950,10);
+	
+	//Text objext
+	int score=0;
+	int lives=3;
+	
+	Text hud;
+	Font font;
+	font.loadFromFile("font/KOMIKAP_.ttf");
+	hud.setFont(font);
+	hud.setCharacterSize(50);
+	hud.setFillColor(Color::White);
+	hud.setPosition(0,0);
 	
 	Clock clock; //Clock class
 
@@ -55,12 +72,18 @@ int main(){
 		
 		Time dt = clock.restart();
 		bat.update(dt);
+		ball.update(dt);
+		std::stringstream ss;
+		ss<<"Score:"<<score<<std::endl<<"Lives:"<<lives;
+		hud.setString(ss.str());
 
 		//clear the window
 		window.clear();
 
 		//draw shapes
 		window.draw(bat.getShape());
+		window.draw(ball.getShape());
+		window.draw(hud);
 	
 		//finally display the window
 		window.display();
