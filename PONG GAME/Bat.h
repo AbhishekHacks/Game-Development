@@ -1,29 +1,24 @@
+//adding a  bat at the bottom of window
 #include<SFML/Graphics.hpp>
 using namespace sf;
 
-class Bat{
+class Bat
+{
+   Vector2f m_Position; // 2d vector with floating point coordinate
+   RectangleShape m_Shape; //graphical repersentation of the bat
+   float m_speed = 600.0f; //control how fast the bats movs
+   bool m_MovingLeft = false; //flags to track movement direction
+   bool m_MovingRight = false;
+   
+   public:
+   Bat(float startX,float startY);
+   
+   FloatRect getPosition();
+   RectangleShape getShape();
+   void moveLeft();
+   void moveRight();
+   void stopLeft();
+   void stopRight();
+   void update(Time dt); //moves the bat based on the time
 
-	private:
-	Vector2f m_Position;	//Declare vector2f
-
-	RectangleShape m_Shape;		//Graphical representation of bat
-
-	float m_Speed=600.0f;
-
-	bool m_MovingLeft = false;
-
-	bool m_MovingRight = false;
-
-	public:
-	Bat(float startX, float startY);	//store x and y coordinate of bat
-
-	FloatRect getPosition();	//Retrive the current position of bat(x and y coordinate)
-	RectangleShape getShape();	//Retrive the width and height of shape
-	
-	void moveLeft();
-	void moveRight();
-	void stopLeft();
-	void stopRight();
-	
-	void update(Time dt);   //dt is the time between each frame
-};
+ };

@@ -3,7 +3,7 @@
 Bat::Bat(float startX, float startY){
 	m_Position.x = startX;
 	m_Position.y = startY;
-	m_Shape.setSize(sf::Vector2f(200,50));
+	m_Shape.setSize(sf::Vector2f(200,30));
 	m_Shape.setPosition(m_Position);
 }
 
